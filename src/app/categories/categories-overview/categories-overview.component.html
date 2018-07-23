@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="cs-table table table-hover table-bordered">
+        <thead class="cs-table thead-dark">
+          <tr>
+            <th>category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories; let i = index">
+            <td>
+              <app-categories-settings *ngIf='show; else categoryOverview'></app-categories-settings>
+              <!--do usunięcia-->
+              <ng-template #categoryOverview>
+                {{ category.name }}
+                <div class="btn btn-group action">
+                  <button (click)='deleteCategory(category, $event)' class="btn btn-danger">X</button>
+                  <button (click)='show = !show' id='btn-{{ category.id }}' class="btn btn-primary">edit</button>
+                </div>
+              </ng-template>
+            </td>
+            <!---->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="btn btn-group float-right">
+    <button class="btn btn-success float-right btn-lg">
+      add
+    </button>
+    <button class="btn btn-primary float-right btn-lg">
+      edit all
+    </button>
+    <button class="btn btn-danger float-right btn-lg">
+      delete all
+    </button>
+  </div>
+</div>
