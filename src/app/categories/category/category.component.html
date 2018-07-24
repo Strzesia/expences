@@ -1,0 +1,10 @@
+<div *ngIf="!show; else settings">
+  {{ category.name }}
+  <div class="btn btn-group action float-right">
+    <button (click)='show = !show' id='btn-{{ category.id }}' class="btn btn-primary">edit</button>
+    <button (click)='deleteCategory(category, $event)' class="btn btn-danger">X</button>
+  </div>
+</div>
+<ng-template #settings>
+  <app-categories-settings [category]="category"></app-categories-settings>
+</ng-template>

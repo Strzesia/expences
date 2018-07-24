@@ -26,4 +26,10 @@ export class CategoriesOverviewComponent implements OnInit {
     })
   }
 
+  deleteCategory(category : Category, event) : void {
+    this.categoriesService.deleteCategory(category.id).subscribe(() => {
+      this.loadCategories();
+    })
+  }
+
 }

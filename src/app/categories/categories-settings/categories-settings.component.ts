@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CategoriesService } from '../../categories.service';
 import { Category } from '../../models/category';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-categories-settings',
@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class CategoriesSettingsComponent implements OnInit {
 
   categories : Category[];
-  category : Category;
+  @Input() category : Category;
   categoryForm : FormGroup;
 
   constructor(
@@ -21,27 +21,23 @@ export class CategoriesSettingsComponent implements OnInit {
 
   buildCategoryForm() {
     return this.formBuilder.group({
-      name: [this.category.name]
+      name: [this.category.name, Validators.required]
     })
   }
 
   ngOnInit() {
+    this.categoryForm = this.buildCategoryForm();
   }
-  
+
   loadCategories() : void {
     this.categoriesService.getCategories().subscribe((categories) => {
       this.categories = categories;
     })
   }
 
-  deleteCategory(category : Category, event) : void {
-    this.categoriesService.deleteCategory(category.id).subscribe(() => {
-      this.loadCategories();
+  editCategory() {
+    this.categoriesService.editCategory(this.category.id, this.categoryForm.value).subscribe(() => {
     })
   }
   
-  editCategory() {
-    this.categoriesService.editCategory(this.category.id, this.categoryForm.value).subscribe(() => {})
-  }
-
 }

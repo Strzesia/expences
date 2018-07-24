@@ -7,8 +7,8 @@ import { ExpencesOverviewModule } from './expences-overview/expences-overview.mo
 import { CategoriesService } from './categories.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoriesModule } from './categories/categories.module';
-import { ReactiveFormsModule, FormsModule } from '../../node_modules/@angular/forms';
-import { ActivatedRoute, Router } from '../../node_modules/@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @NgModule({

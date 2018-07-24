@@ -10,17 +10,8 @@
         <tbody>
           <tr *ngFor="let category of categories; let i = index">
             <td>
-              <app-categories-settings *ngIf='show; else categoryOverview'></app-categories-settings>
-              <!--do usunięcia-->
-              <ng-template #categoryOverview>
-                {{ category.name }}
-                <div class="btn btn-group action">
-                  <button (click)='deleteCategory(category, $event)' class="btn btn-danger">X</button>
-                  <button (click)='show = !show' id='btn-{{ category.id }}' class="btn btn-primary">edit</button>
-                </div>
-              </ng-template>
+              <app-category [category]="category" ></app-category>
             </td>
-            <!---->
           </tr>
         </tbody>
       </table>
