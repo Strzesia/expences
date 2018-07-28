@@ -21,11 +21,8 @@ import { ActivatedRoute, Router } from '@angular/router';
     CoreModule,
     ExpencesOverviewModule,
     HttpClientModule,
-    CategoriesModule,
-    ReactiveFormsModule,
-    FormsModule,
-
-    ],
+    CategoriesModule
+  ],
   providers: [CategoriesService],
   bootstrap: [AppComponent]
 })

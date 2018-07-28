@@ -18,15 +18,15 @@ export class CategoriesSettingsComponent implements OnInit {
     private categoriesService : CategoriesService,
     private formBuilder : FormBuilder,
   ) { }
-
+  
+    ngOnInit() {
+      this.categoryForm = this.buildCategoryForm();
+    }
+  
   buildCategoryForm() {
     return this.formBuilder.group({
       name: [this.category.name, Validators.required]
     })
-  }
-
-  ngOnInit() {
-    this.categoryForm = this.buildCategoryForm();
   }
 
   loadCategories() : void {

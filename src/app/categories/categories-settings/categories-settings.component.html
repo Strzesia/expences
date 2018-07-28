@@ -1,7 +1,9 @@
 <div>
   <div class="row form-group">
     <div class="col-sm-11 input">
-      <input formControlName="name" type="string" class="form-control" placeholder="{{category.name}}">
+      <form [formGroup]="categoryForm">
+        <input formControlName="name" type="string" class="form-control" placeholder="{{category.name}}">
+      </form>
     </div>
     <div class="col-sm-1 action">
       <button (click)="editCategory()" class="btn btn-success" type="submit">&#10004;</button>
