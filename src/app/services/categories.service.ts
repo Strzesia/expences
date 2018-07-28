@@ -7,7 +7,7 @@ import { Category } from '../models/category';
 @Injectable()
 export class CategoriesService {
 
-  private apiUrl = "https://cors-anywhere.herokuapp.com/" + "https://expences-api.herokuapp.com/categories";
+  private apiUrl = "https://cryptic-headland-94862.herokuapp.com/" + "https://expences-api.herokuapp.com/categories";
 
   constructor(private http: HttpClient) { }
 
