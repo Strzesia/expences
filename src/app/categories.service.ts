@@ -7,7 +7,7 @@ import 'rxjs';
 @Injectable()
 export class CategoriesService {
 
-  private apiUrl = "https://ancient-ocean-16406.herokuapp.com/categories";
+  private apiUrl = "https://expences-api.herokuapp.com/categories";
 
   constructor(private http: HttpClient) { }
 
