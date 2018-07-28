@@ -7,7 +7,7 @@ import { Category } from '../models/category';
 @Injectable()
 export class CategoriesService {
 
-  private apiUrl = "https://cryptic-headland-94862.herokuapp.com/" + "https://expences-api.herokuapp.com/categories";
+  private apiUrl = "https://expences-api.herokuapp.com/categories";
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class CategoriesService {
 
   getCategory(id: number) : Observable<Category> {
     return this.http.get(
-      this.apiUrl + `${id}`
+      this.apiUrl + `/${id}`
     ) as Observable<Category>;
   }
 
@@ -31,13 +31,13 @@ export class CategoriesService {
 
   editCategory(id : number, data) : Observable<Category> {
     return this.http.put(
-      this.apiUrl + `${id}`, data
+      this.apiUrl + `/${id}`, data
     ) as Observable<Category>;
   }
 
   deleteCategory(id: number) : Observable<Category> {
     return this.http.delete(
-      this.apiUrl + `${id}`
+      this.apiUrl + `/${id}`
     ) as Observable<Category>;
   }
   
