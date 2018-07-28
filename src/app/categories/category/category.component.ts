@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Category } from '../../models/category';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CategoriesService } from '../../categories.service';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   selector: 'app-category',
