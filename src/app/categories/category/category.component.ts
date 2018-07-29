@@ -28,13 +28,4 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  editCategory() {
-    this.categoriesService.editCategory(this.category.id, this.categoryForm.value).subscribe(() => {})
-  }
-
-  deleteCategory(category : Category, event) : void {
-    this.categoriesService.deleteCategory(category.id).subscribe(() => {
-    })
-  }
-
 }

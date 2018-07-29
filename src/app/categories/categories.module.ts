@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoriesSettingsComponent } from './categories-settings/categories-settings.component';
 import { CategoriesOverviewComponent } from './categories-overview/categories-overview.component';
 import { CategoryComponent } from './category/category.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
 
 @NgModule({
   imports: [
@@ -12,10 +13,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FormsModule
   ],
   exports: [
-    CategoriesSettingsComponent,
+    EditCategoryComponent,
     CategoriesOverviewComponent,
     CategoryComponent
   ],
-  declarations: [CategoriesSettingsComponent, CategoriesOverviewComponent, CategoryComponent]
+  declarations: [EditCategoryComponent, CategoriesOverviewComponent, CategoryComponent, AddCategoryComponent]
 })
 export class CategoriesModule { }

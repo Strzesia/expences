@@ -8,24 +8,23 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <div *ngIf="!show; else categoryAdd" class="btn btn-group float-right">
+              <button (click)="show = !show" class="btn btn-success float-right btn-lg">
+                add
+              </button>
+            </div>
+            <ng-template #categoryAdd>
+              <app-add-category></app-add-category>
+            </ng-template>
+          </tr>
           <tr *ngFor="let category of categories; let i = index">
             <td>
-              <app-category [category]="category" ></app-category>
+              <app-category [category]="category"></app-category>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="btn btn-group float-right">
-    <button class="btn btn-success float-right btn-lg">
-      add
-    </button>
-    <button class="btn btn-primary float-right btn-lg">
-      edit all
-    </button>
-    <button class="btn btn-danger float-right btn-lg">
-      delete all
-    </button>
   </div>
 </div>
