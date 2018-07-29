@@ -37,6 +37,7 @@ export class AddCategoryComponent implements OnInit {
   }
 
   addCategory(data) : void {
+    console.log(data);
     this.categoriesService.addCategory(data).subscribe(() => {
       this.loadCategories();
     })

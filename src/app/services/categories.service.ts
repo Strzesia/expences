@@ -23,15 +23,16 @@ export class CategoriesService {
     ) as Observable<Category>;
   }
 
-  addCategory(name) : Observable<Category> {
+  addCategory(data) : Observable<Category> {
+    console.log(data);
     return this.http.post(
-      this.apiUrl, name
+      this.apiUrl, data
     ) as Observable<Category>;
   }
 
-  editCategory(id : number, name) : Observable<Category> {
+  editCategory(id : number, data) : Observable<Category> {
     return this.http.put(
-      this.apiUrl + `/${id}`, name
+      this.apiUrl + `/${id}`, data
     ) as Observable<Category>;
   }
 
