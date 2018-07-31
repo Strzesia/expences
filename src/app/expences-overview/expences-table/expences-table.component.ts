@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Expence } from '../../models/expence';
+import { ExpencesService } from '../../services/expences.service';
 
 @Component({
   selector: 'app-expences-table',
@@ -7,8 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpencesTableComponent implements OnInit {
 
-  constructor() { }
+  expences : Expence[];
+  expence : Expence;
 
-  ngOnInit() {}
+  constructor(
+    private expencesService : ExpencesService
+  ) { }
+
+  ngOnInit() {
+    this.loadExpences();
+  }
+
+  loadExpences() : void {
+    this.expencesService.getExpences().subscribe((expences) => {
+      this.expences = expences;
+    })
+  }
 
 }

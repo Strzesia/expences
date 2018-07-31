@@ -9,6 +9,8 @@ import { ExpencesTableComponent } from './expences-table/expences-table.componen
   exports: [
     ExpencesTableComponent
   ],
-  declarations: [ExpencesTableComponent]
+  declarations: [
+    ExpencesTableComponent
+  ]
 })
 export class ExpencesOverviewModule { }

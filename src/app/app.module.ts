@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoriesModule } from './categories/categories.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ExpencesService } from './services/expences.service';
 
 
 @NgModule({
@@ -23,7 +24,10 @@ import { ActivatedRoute, Router } from '@angular/router';
     HttpClientModule,
     CategoriesModule
   ],
-  providers: [CategoriesService],
+  providers: [
+    CategoriesService,
+    ExpencesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

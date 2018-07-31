@@ -17,6 +17,11 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
     CategoriesOverviewComponent,
     CategoryComponent
   ],
-  declarations: [EditCategoryComponent, CategoriesOverviewComponent, CategoryComponent, AddCategoryComponent]
+  declarations: [
+    EditCategoryComponent,
+    CategoriesOverviewComponent,
+    CategoryComponent,
+    AddCategoryComponent
+  ]
 })
 export class CategoriesModule { }
