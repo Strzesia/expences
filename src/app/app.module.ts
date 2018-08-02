@@ -7,10 +7,9 @@ import { ExpencesOverviewModule } from './expences-overview/expences-overview.mo
 import { CategoriesService } from './services/categories.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoriesModule } from './categories/categories.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ExpencesService } from './services/expences.service';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,11 +21,14 @@ import { ExpencesService } from './services/expences.service';
     CoreModule,
     ExpencesOverviewModule,
     HttpClientModule,
-    CategoriesModule
+    CategoriesModule,
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [
     CategoriesService,
-    ExpencesService
+    ExpencesService,
+    
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../models/category';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories-overview',
@@ -9,30 +10,38 @@ import { Category } from '../../models/category';
 })
 export class CategoriesOverviewComponent implements OnInit {
 
-  categories : Category[];
-  category : Category;
+  categories: Category[];
+  category: Category;
+  newCategory: Category;
 
   constructor(
-    private categoriesService : CategoriesService
+    private categoriesService: CategoriesService
   ) { }
 
   ngOnInit() {
     this.loadCategories();
   }
 
-  loadCategories() : void {
-    this.categoriesService.getCategories().subscribe((categories) => {
-      this.categories = categories;
+  loadCategories(): void {
+    this.categoriesService.getCategories().subscribe(data => {
+      this.categories = data;
+      console.log(data);
     })
   }
 
-  addCategory(data) : void {
-    this.categoriesService.addCategory(data).subscribe(() => {
+  addCategory(newCategory: Category): void {
+    this.categoriesService.addCategory(newCategory).subscribe(data => {
       this.loadCategories();
     })
   }
 
-  deleteCategory(category : Category, event) : void {
+  editCategory(editedCategory: Category) {
+    this.categoriesService.editCategory(editedCategory.id, editedCategory).subscribe((category) => {
+      this.loadCategories();
+    })
+  }
+
+  deleteCategory(category: Category, event): void {
     this.categoriesService.deleteCategory(category.id).subscribe(() => {
       this.loadCategories();
     })

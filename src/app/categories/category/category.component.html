@@ -1,10 +1,10 @@
-<div *ngIf="!show; else settings">
+<div *ngIf="!editFormOpened; else settings">
   {{ category?.name }}
   <div class="btn btn-group action float-right">
-    <button (click)='show = !show' id='btn-{{ category.id }}' class="btn btn-primary">edit</button>
-    <button (click)='deleteCategory(category, $event)' class="btn btn-danger">X</button>
+    <button (click)='editFormOpened = !editFormOpened' id='btn-{{ category.id }}' class="btn btn-primary">edit</button>
+    <button (click)='deleteCategory(category, $event)' class="btn btn-danger fa fa-times"></button>
   </div>
 </div>
 <ng-template #settings>
-  <app-edit-category [category]="category"></app-edit-category>
+  <app-edit-category [category]="category" (opened)="closeForm($event)" (editedCategory)="onEdited($event)"></app-edit-category>
 </ng-template>

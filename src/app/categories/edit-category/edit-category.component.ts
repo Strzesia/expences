@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../models/category';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-category',
@@ -13,10 +14,14 @@ export class EditCategoryComponent implements OnInit {
   categories: Category[];
   @Input() category: Category;
   categoryForm: FormGroup;
+  @Output("opened") opened: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() editedCategory: EventEmitter<Category> = new EventEmitter<Category>();
 
   constructor(
     private categoriesService: CategoriesService,
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -29,22 +34,13 @@ export class EditCategoryComponent implements OnInit {
     })
   }
 
-  loadCategories(): void {
-    this.categoriesService.getCategories().subscribe((categories) => {
-      this.categories = categories;
-    })
+  closeEditForm(): void {
+    this.opened.emit(false);
   }
 
-  editCategory() {
-    this.categoriesService.editCategory(this.category.id, this.categoryForm.value).subscribe(() => {
-      this.loadCategories();
-    })
-  }
-
-  deleteCategory(category: Category, event): void {
-    this.categoriesService.deleteCategory(category.id).subscribe(() => {
-      this.loadCategories();
-    })
+  onEditClick(editedCategory: Category) {
+    this.editedCategory.emit(editedCategory);
+    this.closeEditForm();
   }
 
 }

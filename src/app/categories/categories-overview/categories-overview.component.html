@@ -1,3 +1,7 @@
+<app-header>
+  <p component>Categories</p>
+</app-header>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
@@ -15,12 +19,12 @@
               </button>
             </div>
             <ng-template #categoryAdd>
-              <app-add-category></app-add-category>
+              <app-add-category (addedCategory)="addCategory($event)"></app-add-category>
             </ng-template>
           </tr>
           <tr *ngFor="let category of categories; let i = index">
             <td>
-              <app-category [category]="category"></app-category>
+              <app-category [category]="category" (edited)="editCategory($event)"></app-category>
             </td>
           </tr>
         </tbody>

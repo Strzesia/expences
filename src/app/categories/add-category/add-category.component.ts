@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../models/category';
@@ -14,6 +14,8 @@ export class AddCategoryComponent implements OnInit {
   @Input() category : Category;
   categoryForm : FormGroup;
 
+  @Output() addedCategory : EventEmitter<Category> = new EventEmitter<Category>();
+
   constructor(
     private categoriesService : CategoriesService,
     private formBuilder : FormBuilder
@@ -21,7 +23,6 @@ export class AddCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.categoryForm = this.buildCategoryForm();
-    console.log(this.categoryForm.value);
   }
 
   buildCategoryForm() {
@@ -36,11 +37,9 @@ export class AddCategoryComponent implements OnInit {
     })
   }
 
-  addCategory(data) : void {
-    console.log(data);
-    this.categoriesService.addCategory(data).subscribe(() => {
-      this.loadCategories();
-    })
+  addCategory(newCategory:Category) : void {
+    console.log("emituję: "+ newCategory);
+    this.addedCategory.emit(newCategory);
   }
 
 }

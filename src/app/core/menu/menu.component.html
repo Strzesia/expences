@@ -1,15 +1,15 @@
 <div class="container">
-  <div id="menu show">
-    &#9776;
-  </div>
-  <div id="menu hide">
-    &#10005;
-  </div>
-  <div class="menu-items">
-    <ul>
-      <li class="item">add expences</li>
-      <li class="item">expences overview</li>
-      <li class="item">categories</li>
-    </ul>
-  </div>
+    <div (click)="toggleCollapse()">
+      <span [hidden]="collapse=='show'" class="menu fa fa-bars fa-lg">
+      </span>
+      <span [hidden]="collapse=='hide'" class="menu fa fa-times fa-lg">
+      </span>
+    </div>
+    <div class="menu-items collapse show" [@collapse]="collapse">
+      <ul>
+        <li class="item">add expences</li>
+        <li class="item" [routerLink]="['/expences']" [routerLinkActive]="'active'">expences overview</li>
+        <li class="item" [routerLink]="['/categories']" [routerLinkActive]="'active'">categories</li>
+      </ul>
+    </div>
 </div>

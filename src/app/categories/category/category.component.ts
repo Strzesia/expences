@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Category } from '../../models/category';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CategoriesService } from '../../services/categories.service';
@@ -10,13 +10,16 @@ import { CategoriesService } from '../../services/categories.service';
 })
 export class CategoryComponent implements OnInit {
 
-  categories : Category[];
-  @Input() category : Category;
-  categoryForm : FormGroup;
+  @Output() edited: EventEmitter<Category> = new EventEmitter<Category>();
+  categories: Category[];
+  @Input() category: Category;
+  categoryForm: FormGroup;
+
+  editFormOpened: boolean = false;
 
   constructor(
-    private categoriesService : CategoriesService,
-    private formBuilder : FormBuilder,
+    private categoriesService: CategoriesService,
+    private formBuilder: FormBuilder,
   ) { }
 
   buildCategoryForm() {
@@ -28,4 +31,12 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
   }
 
+  onEdited(editedCategory: Category) {
+    editedCategory.id = this.category.id;
+    this.edited.emit(editedCategory);
+  }
+
+  closeForm(data): void {
+    this.editFormOpened = data;
+  }
 }

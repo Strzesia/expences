@@ -24,7 +24,6 @@ export class CategoriesService {
   }
 
   addCategory(data) : Observable<Category> {
-    console.log(data);
     return this.http.post(
       this.apiUrl, data
     ) as Observable<Category>;
