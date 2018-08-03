@@ -13,6 +13,7 @@ export class CategoriesOverviewComponent implements OnInit {
   categories: Category[];
   category: Category;
   newCategory: Category;
+  closedAddCategory: boolean;
 
   constructor(
     private categoriesService: CategoriesService
@@ -25,8 +26,11 @@ export class CategoriesOverviewComponent implements OnInit {
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(data => {
       this.categories = data;
-      console.log(data);
     })
+  }
+
+  closeAddForm(data: boolean) {
+    this.closedAddCategory = data;
   }
 
   addCategory(newCategory: Category): void {
@@ -41,7 +45,7 @@ export class CategoriesOverviewComponent implements OnInit {
     })
   }
 
-  deleteCategory(category: Category, event): void {
+  deleteCategory(category: Category): void {
     this.categoriesService.deleteCategory(category.id).subscribe(() => {
       this.loadCategories();
     })

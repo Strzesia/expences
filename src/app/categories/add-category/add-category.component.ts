@@ -10,15 +10,16 @@ import { Category } from '../../models/category';
 })
 export class AddCategoryComponent implements OnInit {
 
-  categories : Category[];
-  @Input() category : Category;
-  categoryForm : FormGroup;
+  categories: Category[];
+  @Input() category: Category;
+  categoryForm: FormGroup;
 
-  @Output() addedCategory : EventEmitter<Category> = new EventEmitter<Category>();
+  @Output() addedCategory: EventEmitter<Category> = new EventEmitter<Category>();
+  @Output() closedForm: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private categoriesService : CategoriesService,
-    private formBuilder : FormBuilder
+    private categoriesService: CategoriesService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -31,15 +32,13 @@ export class AddCategoryComponent implements OnInit {
     })
   }
 
-  loadCategories() : void {
-    this.categoriesService.getCategories().subscribe((categories) => {
-      this.categories = categories;
-    })
+  closeAddForm(): void {
+    this.closedForm.emit(false);
   }
 
-  addCategory(newCategory:Category) : void {
-    console.log("emituję: "+ newCategory);
+  addCategory(newCategory: Category): void {
     this.addedCategory.emit(newCategory);
+    this.closeAddForm();11
   }
 
 }

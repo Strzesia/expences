@@ -11,10 +11,12 @@ import { CategoriesService } from '../../services/categories.service';
 export class CategoryComponent implements OnInit {
 
   @Output() edited: EventEmitter<Category> = new EventEmitter<Category>();
-  categories: Category[];
-  @Input() category: Category;
-  categoryForm: FormGroup;
+  @Output() deleted: EventEmitter<Category> = new EventEmitter<Category>();
 
+  @Input() category: Category;
+
+  categories: Category[];
+  categoryForm: FormGroup;
   editFormOpened: boolean = false;
 
   constructor(
@@ -31,9 +33,13 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  onEdited(editedCategory: Category) {
+  onEditClick(editedCategory: Category) {
     editedCategory.id = this.category.id;
     this.edited.emit(editedCategory);
+  }
+
+  onDeleteClick() {
+    this.deleted.emit(this.category);
   }
 
   closeForm(data): void {

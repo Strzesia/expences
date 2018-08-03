@@ -1,14 +1,13 @@
 <div>
   <div class="row form-group">
-    <div class="col-sm-11 input">
+    <div class="col-sm-10 input">
       <form [formGroup]="categoryForm">
         <input formControlName="name" type="string" class="form-control" placeholder="category name">
       </form>
     </div>
-    <div class="col-sm-1 action">
-      <button (click)="addCategory(categoryForm.value)" class="btn btn-success" type="submit">&#10004;</button>
+    <div class="col-sm-2 action btn-group">
+      <button (click)="addCategory(categoryForm.value)" class="btn btn-success fa fa-check" type="submit"></button>
+      <button (click)="closeAddForm()" class="btn btn-danger fa fa-times"></button>
     </div>
   </div>
 </div>
-
-<pre>{{ categoryForm.value | json }}</pre>

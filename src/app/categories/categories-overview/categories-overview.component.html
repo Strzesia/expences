@@ -13,18 +13,18 @@
         </thead>
         <tbody>
           <tr>
-            <div *ngIf="!show; else categoryAdd" class="btn btn-group float-right">
-              <button (click)="show = !show" class="btn btn-success float-right btn-lg">
+            <div *ngIf="!closedAddCategory; else openedAddCategory" class="btn btn-group float-right">
+              <button (click)="closedAddCategory = !closedAddCategory" class="btn btn-success float-right btn-lg">
                 add
               </button>
             </div>
-            <ng-template #categoryAdd>
-              <app-add-category (addedCategory)="addCategory($event)"></app-add-category>
+            <ng-template #openedAddCategory>
+              <app-add-category (addedCategory)="addCategory($event)" (closedForm)="closeAddForm($event)" ></app-add-category>
             </ng-template>
           </tr>
           <tr *ngFor="let category of categories; let i = index">
             <td>
-              <app-category [category]="category" (edited)="editCategory($event)"></app-category>
+              <app-category [category]="category" (edited)="editCategory($event)" (deleted)="deleteCategory($event)"></app-category>
             </td>
           </tr>
         </tbody>
