@@ -10,6 +10,8 @@ import { CategoriesModule } from './categories/categories.module';
 import { ExpencesService } from './services/expences.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module';
+import { AddExpencesModule } from './add-expences/add-expences.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,10 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     CategoriesModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AddExpencesModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     CategoriesService,

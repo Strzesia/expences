@@ -26,4 +26,10 @@ export class ExpencesTableComponent implements OnInit {
     })
   }
 
+  onDeleteClick(expence: Expence) {
+    this.expencesService.deleteExpence(expence.id).subscribe(() => {
+      this.loadExpences();
+    });
+  }
+
 }

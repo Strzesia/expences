@@ -29,8 +29,11 @@ export class MenuComponent implements OnInit {
   collapse: string = "hide";
 
   toggleCollapse() {
-    // this.show = !this.show
     this.collapse = this.collapse == "show" ? 'hide' : 'show';
+  }
+
+  closeMenu() {
+    this.collapse = this.collapse == "show" ? 'hide' : 'hide';
   }
 
   constructor() { }

@@ -1,3 +1,10 @@
-<div>
-  
-</div>>
+<div class="container row">
+    <span (click)="setPreviousDay()" class="col-sm-1 fa fa-angle-left"></span>
+
+    <div class="col-sm-10">
+        current date:
+        <input #dateInput type="date" [ngModel]="date | date:'yyyy-MM-dd'" (ngModelChange)="setDate(dateInput.value)" >
+    </div>
+
+    <span (click)="setNextDay()" class="col-sm-1 fa fa-angle-right"></span>
+</div>

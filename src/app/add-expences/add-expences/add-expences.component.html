@@ -1,3 +1,34 @@
-<p>
-  add-expences works!
-</p>
+<app-header>
+  <p component>add expenses</p>
+</app-header>
+
+<div class="container">
+
+  <div class="addForm">
+    <div class="row form-group" [formGroup]="expenceForm">
+      <div class="col-sm-6">
+        <select formControlName="categoryId">
+          <option value="" disabled hidden>categories</option>
+          <option *ngFor="let category of categories; let i = index" value="{{category.id}}">{{ category.name }}</option>
+        </select>
+      </div>
+      <div class="col-sm-6">
+        <label>cost: </label>
+        <input formControlName="cost" type="number"> PLN
+      </div>
+    </div>
+    <div class="btn btn-group">
+      <button class="btn btn-info fa fa-plus"></button>
+      <button (click)="addExpence(expenceForm.value)" class="btn btn-success">
+        Add all
+      </button>
+    </div>
+  </div>
+
+</div>
+<pre>
+  {{ currentDate }}
+  {{ expenceForm.value | json}}
+</pre>
+
+<app-set-date (gotDate)="getDate($event)"></app-set-date>

@@ -6,8 +6,8 @@
       </span>
     </div>
     <div class="menu-items collapse show" [@collapse]="collapse">
-      <ul>
-        <li class="item">add expences</li>
+      <ul (click)="closeMenu()">
+        <li class="item" [routerLink]="['/add-expenses']" [routerLinkActive]="'active'">add expences</li>
         <li class="item" [routerLink]="['/expences']" [routerLinkActive]="'active'">expences overview</li>
         <li class="item" [routerLink]="['/categories']" [routerLinkActive]="'active'">categories</li>
       </ul>

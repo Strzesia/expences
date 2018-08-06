@@ -5,15 +5,31 @@
     <thead>
       <tr>
         <td>Date</td>
+
         <td>Category</td>
+
         <td>Cost</td>
       </tr>
     </thead>
+
     <tbody>
-      <tr *ngFor='let expence of expences; let i = index'>
-        <td> {{ expence.date | date:"dd.MM.yyyy"}} </td>
-        <td> {{ expence.category.name }} </td>
-        <td> {{ expence.cost | currency:"PLN"}} </td>
+      <tr *ngFor="let expence of expences; let i = index">
+        <td>
+          {{ expence.date | date:"dd.MM.yyyy"}}
+        </td>
+
+        <td>{{ expence.category.name }}</td>
+
+        <td>
+          {{ expence.cost | currency:"PLN"}}
+        </td>
+
+        <td>
+          <button
+            (click)="onDeleteClick(expence)"
+            class="btn btn-danger fa fa-times"
+          ></button>
+        </td>
       </tr>
     </tbody>
   </table>

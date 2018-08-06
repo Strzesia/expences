@@ -38,7 +38,7 @@ export class AddCategoryComponent implements OnInit {
 
   addCategory(newCategory: Category): void {
     this.addedCategory.emit(newCategory);
-    this.closeAddForm();11
+    this.closeAddForm();
   }
 
 }

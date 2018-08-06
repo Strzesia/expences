@@ -29,7 +29,7 @@ export class CategoriesOverviewComponent implements OnInit {
     })
   }
 
-  closeAddForm(data: boolean) {
+  closeAddForm(data: boolean): void {
     this.closedAddCategory = data;
   }
 
@@ -39,7 +39,7 @@ export class CategoriesOverviewComponent implements OnInit {
     })
   }
 
-  editCategory(editedCategory: Category) {
+  editCategory(editedCategory: Category): void {
     this.categoriesService.editCategory(editedCategory.id, editedCategory).subscribe((category) => {
       this.loadCategories();
     })
