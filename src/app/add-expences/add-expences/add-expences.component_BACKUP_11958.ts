@@ -16,8 +16,9 @@ export class AddExpencesComponent implements OnInit {
   categories: Category[];
   expenceForm: FormGroup;
   currentDate: number;
-
+<<<<<<< HEAD
   sort: Sort = Sort.unsorted;
+=======
   expence :Expence;
 >>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
 
@@ -27,6 +28,17 @@ export class AddExpencesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+<<<<<<< HEAD
+    this.expenceForm = this.buildExpenceForm();
+  }
+
+  buildExpenceForm() {
+    return this.formBuilder.group({
+      categoryId: ["", Validators.required],
+      cost: ["", Validators.required]
+    })
+  }
+=======
     this.loadCategories();
     }
 >>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
@@ -49,6 +61,7 @@ export class AddExpencesComponent implements OnInit {
     this.currentDate = date;
   }
 
+<<<<<<< HEAD
   sortByName(categories: Category[]): Category[] {
     if (this.sort == Sort.byName){
       return categories.reverse();

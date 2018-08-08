@@ -4,7 +4,6 @@ import { CategoriesService } from '../../services/categories.service';
 import { ExpencesService } from '../../services/expences.service';
 import { Expence } from '../../models/expence';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Sort } from '../../shared/sort';
 
 @Component({
   selector: 'app-add-expences',
@@ -17,45 +16,42 @@ export class AddExpencesComponent implements OnInit {
   expenceForm: FormGroup;
   currentDate: number;
 
-  sort: Sort = Sort.unsorted;
-  expence :Expence;
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
-
   constructor(
     private categoriesService: CategoriesService,
     private expencesService: ExpencesService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.loadCategories();
-    }
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
+    this.expenceForm = this.buildExpenceForm();
+  }
+
+  buildExpenceForm() {
+    return this.formBuilder.group({
+      categoryId: ["", Validators.required],
+      cost: ["", Validators.required]
+    })
+  }
 
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(data => {
       this.categories = data;
     })
   }
-  
-  onCreateExpence(data : Expence): void {
-    this.expence = data;
-  }
 
-  addExpence(): void {
-    this.expencesService.addExpence(this.expence).subscribe();
+  addExpence(data : any): void {
+    let newExpence = {
+      date:this.currentDate,
+      cost:data.cost,
+      category: {
+        id: data.categoryId,
+      }
+    };
+    this.expencesService.addExpence(newExpence).subscribe();
   }
 
   getDate(date: number): void {
     this.currentDate = date;
   }
-
-  sortByName(categories: Category[]): Category[] {
-    if (this.sort == Sort.byName){
-      return categories.reverse();
-    }
-    this.sort = Sort.byName;
-    return categories.sort((a,b) => a.name.localeCompare(b.name) );
-  }
-=======
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
 }

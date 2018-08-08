@@ -4,7 +4,6 @@ import { CategoriesService } from '../../services/categories.service';
 import { ExpencesService } from '../../services/expences.service';
 import { Expence } from '../../models/expence';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Sort } from '../../shared/sort';
 
 @Component({
   selector: 'app-add-expences',
@@ -16,10 +15,7 @@ export class AddExpencesComponent implements OnInit {
   categories: Category[];
   expenceForm: FormGroup;
   currentDate: number;
-
-  sort: Sort = Sort.unsorted;
   expence :Expence;
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
 
   constructor(
     private categoriesService: CategoriesService,
@@ -29,7 +25,6 @@ export class AddExpencesComponent implements OnInit {
   ngOnInit() {
     this.loadCategories();
     }
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
 
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(data => {
@@ -49,13 +44,4 @@ export class AddExpencesComponent implements OnInit {
     this.currentDate = date;
   }
 
-  sortByName(categories: Category[]): Category[] {
-    if (this.sort == Sort.byName){
-      return categories.reverse();
-    }
-    this.sort = Sort.byName;
-    return categories.sort((a,b) => a.name.localeCompare(b.name) );
-  }
-=======
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
 }
