@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../models/category';
-import { Route, Router } from '@angular/router';
+import { Sort } from '../../shared/sort';
 
 @Component({
   selector: 'app-categories-overview',
@@ -14,6 +14,7 @@ export class CategoriesOverviewComponent implements OnInit {
   category: Category;
   newCategory: Category;
   closedAddCategory: boolean;
+  sort: Sort = Sort.unsorted;
 
   constructor(
     private categoriesService: CategoriesService
@@ -49,6 +50,14 @@ export class CategoriesOverviewComponent implements OnInit {
     this.categoriesService.deleteCategory(category.id).subscribe(() => {
       this.loadCategories();
     })
+  }
+
+  sortByName(categories: Category[]): Category[] {
+    if (this.sort == Sort.byName){
+      return categories.reverse();
+    }
+    this.sort = Sort.byName;
+    return categories.sort((a,b) => a.name.localeCompare(b.name) );
   }
 
 }

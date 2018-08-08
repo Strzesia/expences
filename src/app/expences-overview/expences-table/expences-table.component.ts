@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Expence } from '../../models/expence';
 import { ExpencesService } from '../../services/expences.service';
+import { Sort } from '../../shared/sort';
 
 @Component({
   selector: 'app-expences-table',
@@ -11,6 +12,7 @@ export class ExpencesTableComponent implements OnInit {
 
   expences : Expence[];
   expence : Expence;
+  sort : Sort = Sort.unsorted;
 
   constructor(
     private expencesService : ExpencesService
@@ -32,4 +34,27 @@ export class ExpencesTableComponent implements OnInit {
     });
   }
 
+  sortByDate(expences: Expence[]):Expence[] {
+    if (this.sort == Sort.byDate){
+      return expences.reverse();
+    }
+    this.sort = Sort.byDate;
+    return expences.sort((a,b) => a.date - b.date );    
+  }
+
+  sortByCategory(expences: Expence[]):Expence[] {
+    if (this.sort == Sort.byCategory){
+      return expences.reverse();
+    }
+    this.sort = Sort.byCategory;
+    return expences.sort((a,b) => a.category.name.localeCompare(b.category.name));    
+  }
+
+  sortByCost(expences: Expence[]):Expence[] {
+    if (this.sort == Sort.byCost){
+      return expences.reverse();
+    }
+    this.sort = Sort.byCost;
+    return expences.sort((a,b) => a.cost - b.cost );    
+  }
 }
