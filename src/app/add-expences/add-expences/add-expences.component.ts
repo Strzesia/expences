@@ -15,43 +15,33 @@ export class AddExpencesComponent implements OnInit {
   categories: Category[];
   expenceForm: FormGroup;
   currentDate: number;
+  expence :Expence;
 
   constructor(
     private categoriesService: CategoriesService,
     private expencesService: ExpencesService,
-    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.loadCategories();
-    this.expenceForm = this.buildExpenceForm();
-  }
-
-  buildExpenceForm() {
-    return this.formBuilder.group({
-      categoryId: ["", Validators.required],
-      cost: ["", Validators.required]
-    })
-  }
+    }
 
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(data => {
       this.categories = data;
     })
   }
+  
+  onCreateExpence(data : Expence): void {
+    this.expence = data;
+  }
 
-  addExpence(data : any): void {
-    let newExpence = {
-      date:this.currentDate,
-      cost:data.cost,
-      category: {
-        id: data.categoryId,
-      }
-    };
-    this.expencesService.addExpence(newExpence).subscribe();
+  addExpence(): void {
+    this.expencesService.addExpence(this.expence).subscribe();
   }
 
   getDate(date: number): void {
     this.currentDate = date;
   }
+
 }
