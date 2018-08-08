@@ -16,10 +16,8 @@ export class AddExpencesComponent implements OnInit {
   categories: Category[];
   expenceForm: FormGroup;
   currentDate: number;
-
   sort: Sort = Sort.unsorted;
   expence :Expence;
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
 
   constructor(
     private categoriesService: CategoriesService,
@@ -29,11 +27,11 @@ export class AddExpencesComponent implements OnInit {
   ngOnInit() {
     this.loadCategories();
     }
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
 
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(data => {
       this.categories = data;
+      this.sortByName(this.categories);
     })
   }
   
@@ -41,7 +39,7 @@ export class AddExpencesComponent implements OnInit {
     this.expence = data;
   }
 
-  addExpence(): void {
+  addExpences(): void {
     this.expencesService.addExpence(this.expence).subscribe();
   }
 
@@ -56,6 +54,5 @@ export class AddExpencesComponent implements OnInit {
     this.sort = Sort.byName;
     return categories.sort((a,b) => a.name.localeCompare(b.name) );
   }
-=======
->>>>>>> 6993ea99a646d6137f5437ef2b4b99844aa603db
+
 }

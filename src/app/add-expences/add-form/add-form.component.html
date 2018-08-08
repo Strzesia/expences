@@ -1,0 +1,14 @@
+<div class="addForm">
+    <div class="row form-group" [formGroup]="expenceForm">
+      <div class="col-sm-6">
+        <select (change)="createExpence(expenceForm.value)" formControlName="categoryId">
+          <option value="" disabled hidden>categories</option>
+          <option *ngFor="let category of categories; let i = index" value="{{category.id}}">{{ category?.name }}</option>
+        </select>
+      </div>
+      <div class="col-sm-6">
+        <label>cost: </label>
+        <input (change)="createExpence(expenceForm.value)" formControlName="cost" type="number"> PLN
+      </div>
+    </div>
+</div>
