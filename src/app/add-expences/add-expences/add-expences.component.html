@@ -4,21 +4,24 @@
 
 <div class="container">
   <div *ngIf="categories">
-    <app-add-form [categories]="categories" [currentDate]="currentDate" (addedExpense)="onCreateExpence($event)" ></app-add-form>
+    <div>
+      <app-add-form [categories]="categories" [currentDate]="currentDate" (addedExpense)="onCreateExpence($event)" ></app-add-form>
+    </div>
   </div>
 
   <ng-template *ngIf='loading'>
-  <i class="fas fa-spinner fa-pulse"></i>
-  <p><b>xxx</b></p>
-</ng-template>
+    <i class="fas fa-spinner fa-pulse"></i>
+    <p><b>xxx</b></p>
+  </ng-template>
 
   <div class="btn btn-group">
-      <button class="btn btn-info fa fa-plus"></button>
-      <button (click)="addExpences()" class="btn btn-success">
+      <button (click)="saveExpences()" class="btn btn-success">
         Add all
       </button>
     </div>
 
 </div>
+
+<app-expences-table *ngIf="expences.length > 0" [expencesArr]="expences" [expencesSum]="expencesSum" (deletedExpence)="onDeleteClick($event)" ></app-expences-table>
 
 <app-set-date (gotDate)="getDate($event)"></app-set-date>

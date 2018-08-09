@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoriesService } from '../../services/categories.service';
 import { ExpencesService } from '../../services/expences.service';
@@ -17,7 +17,9 @@ export class AddExpencesComponent implements OnInit {
   expenceForm: FormGroup;
   currentDate: number;
   sort: Sort = Sort.unsorted;
-  expence :Expence;
+  expence: Expence;
+  expences: Expence[] = [];
+  expencesSum: number = 0;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -36,11 +38,23 @@ export class AddExpencesComponent implements OnInit {
   }
   
   onCreateExpence(data : Expence): void {
-    this.expence = data;
+      this.expences.push(data)
+      this.expencesSum += data.cost;
+      console.log(`Suma wydatkow = ${this.expencesSum}`)
   }
 
-  addExpences(): void {
-    this.expencesService.addExpence(this.expence).subscribe();
+  onDeleteClick(expence: Expence): void {
+    this.expences = this.expences.filter(item => item !== expence)
+  }
+
+  saveExpences(): void {
+    this.expences.forEach(expence => 
+      {
+      this.expencesService.addExpence(expence).subscribe(
+        (expence) => {
+        console.log(`${expence.category}, ${expence.cost} is added`);
+        this.expences = [];
+      })});
   }
 
   getDate(date: number): void {

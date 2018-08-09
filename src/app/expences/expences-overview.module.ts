@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpencesTableComponent } from './expences-table/expences-table.component';
 import { SharedModule } from '../shared/shared.module';
+import { ExpencesOverviewComponent } from './expences-overview/expences-overview.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { SharedModule } from '../shared/shared.module';
     ExpencesTableComponent
   ],
   declarations: [
-    ExpencesTableComponent
+    ExpencesTableComponent,
+    ExpencesOverviewComponent
   ]
 })
 export class ExpencesOverviewModule { }

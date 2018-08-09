@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { ExpencesOverviewModule } from './expences-overview/expences-overview.module';
+import { ExpencesOverviewModule } from './expences/expences-overview.module';
 import { CategoriesService } from './services/categories.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoriesModule } from './categories/categories.module';

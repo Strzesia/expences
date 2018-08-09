@@ -1,0 +1,5 @@
+<app-header></app-header>
+
+<div class="container">
+  <app-expences-table *ngIf="expences" [expencesArr]="expences" (deletedExpence)="deleteExpence($event)"></app-expences-table>
+</div>

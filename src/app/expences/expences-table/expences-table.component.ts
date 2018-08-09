@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expence } from '../../models/expence';
-import { ExpencesService } from '../../services/expences.service';
 import { Sort } from '../../shared/sort';
 
 @Component({
@@ -10,28 +9,28 @@ import { Sort } from '../../shared/sort';
 })
 export class ExpencesTableComponent implements OnInit {
 
-  expences : Expence[];
+  private expences: Expence[];
   expence : Expence;
   sort : Sort = Sort.unsorted;
+  @Input() expencesSum?: number = 0;
+  @Output() deletedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
 
-  constructor(
-    private expencesService : ExpencesService
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.loadExpences();
-  }
+  ngOnInit() { }
 
-  loadExpences() : void {
-    this.expencesService.getExpences().subscribe((expences) => {
-      this.expences = expences;
-    })
-  }
+  @Input()
+  set expencesArr(expences : Expence[]){
+    this.expences = expences;  
+    this.expencesSum = 0;
+    this.expences.forEach(expence => {
+      this.expencesSum += expence.cost;
+    });
+  }  
+
 
   onDeleteClick(expence: Expence) {
-    this.expencesService.deleteExpence(expence.id).subscribe(() => {
-      this.loadExpences();
-    });
+    this.deletedExpence.emit(expence);
   }
 
   sortByDate(expences: Expence[]):Expence[] {

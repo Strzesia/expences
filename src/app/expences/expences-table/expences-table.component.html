@@ -1,6 +1,3 @@
-<app-header></app-header>
-
-<div class="container">
   <table class="cs-table table table-striped">
     <thead>
       <tr>
@@ -32,5 +29,12 @@
         </td>
       </tr>
     </tbody>
+
+    <tfoot>
+      <td  style="visibility: hidden;"></td>
+      <td  style="visibility: hidden;"></td>
+      <td>{{ expencesSum | currency:"PLN" }}</td>
+      <td  style="visibility: hidden;"></td>
+    </tfoot>
+      
   </table>
-</div>
