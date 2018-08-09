@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoriesService } from '../../services/categories.service';
 import { ExpencesService } from '../../services/expences.service';
 import { Expence } from '../../models/expence';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Sort } from '../../shared/sort';
+import { ArraySorter } from '../../shared/sort';
 
 @Component({
   selector: 'app-add-expences',
@@ -16,8 +16,10 @@ export class AddExpencesComponent implements OnInit {
   categories: Category[];
   expenceForm: FormGroup;
   currentDate: number;
-  sort: Sort = Sort.unsorted;
-  expence :Expence;
+  expence: Expence;
+  expences: Expence[] = [];
+  expencesSum: number = 0;
+  arraySorter: ArraySorter = new ArraySorter();
 
   constructor(
     private categoriesService: CategoriesService,
@@ -26,33 +28,37 @@ export class AddExpencesComponent implements OnInit {
 
   ngOnInit() {
     this.loadCategories();
-    }
+  }
 
   loadCategories(): void {
-    this.categoriesService.getCategories().subscribe(data => {
-      this.categories = data;
-      this.sortByName(this.categories);
-    })
+    this.categoriesService.getCategories().subscribe(
+      categories => {
+        this.arraySorter.sortCategoriesByName(categories);
+        this.categories = categories
+    });
   }
   
   onCreateExpence(data : Expence): void {
-    this.expence = data;
+      this.expences.push(data)
+      this.expencesSum += data.cost;
   }
 
-  addExpences(): void {
-    this.expencesService.addExpence(this.expence).subscribe();
+  onDeleteClick(expence: Expence): void {
+    this.expences = this.expences.filter(item => item !== expence)
+  }
+
+  saveExpences(): void {
+    this.expences.forEach(expence => 
+      {
+      this.expencesService.addExpence(expence).subscribe(
+        (expence) => {
+        console.log(`${expence.category}, ${expence.cost} is added`);
+        this.expences = [];
+      })});
   }
 
   getDate(date: number): void {
     this.currentDate = date;
-  }
-
-  sortByName(categories: Category[]): Category[] {
-    if (this.sort == Sort.byName){
-      return categories.reverse();
-    }
-    this.sort = Sort.byName;
-    return categories.sort((a,b) => a.name.localeCompare(b.name) );
   }
 
 }

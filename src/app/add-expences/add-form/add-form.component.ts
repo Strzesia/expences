@@ -32,6 +32,7 @@ export class AddFormComponent implements OnInit {
 
   emitExpence(expence: Expence): void {
     this.addedExpense.emit(expence);
+    this.expenceForm.reset();
   }
 
   createExpence(data : any):void {

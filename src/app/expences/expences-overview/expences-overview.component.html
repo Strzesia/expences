@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+<!--
+    <label>One day</label>
+    <input [ngModel]="dayCheckbox" (ngModelChange)="changeDayCheckbox()" type="checkbox">
+    <div *ngIf="dayCheckbox">
+        <input type="date">
+        <input type="date">
+    </div>
+-->
+
+    <select *ngIf="categories" (change)="onCategoriesChange($event.target.value)">
+      <option value="-1">All categories</option>
+      <option *ngFor="let category of categories; let i = index" value="{{category.id}}">{{ category.name }}</option>
+    </select>
+  </div>
+  <app-expences-table *ngIf="expences" [expencesArr]="expences" (deletedExpence)="deleteExpence($event)"></app-expences-table>
+</div>

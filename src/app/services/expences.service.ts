@@ -53,4 +53,10 @@ export class ExpencesService {
     ) as Observable<Expence[]>;
   }
 
+  getExpencesByCategory(categoryId): Observable<Expence[]> {
+    return this.http.get(
+      this.apiUrl + `/category/${categoryId}`
+    ) as Observable<Expence[]>;
+  }
+
 }

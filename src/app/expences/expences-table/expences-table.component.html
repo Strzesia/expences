@@ -1,14 +1,11 @@
-<app-header></app-header>
-
-<div class="container">
   <table class="cs-table table table-striped">
     <thead>
       <tr>
-        <td (click)="sortByDate(expences)">Date</td>
+        <td (click)="sortByDate()">Date</td>
 
-        <td (click)="sortByCategory(expences)" >Category</td>
+        <td (click)="sortByCategory()" >Category</td>
 
-        <td (click)="sortByCost(expences)" >Cost</td>
+        <td (click)="sortByCost()" >Cost</td>
       </tr>
     </thead>
 
@@ -32,5 +29,12 @@
         </td>
       </tr>
     </tbody>
+
+    <tfoot>
+      <td  style="visibility: hidden;"></td>
+      <td  style="visibility: hidden;"></td>
+      <td>{{ expencesSum | currency:"PLN" }}</td>
+      <td  style="visibility: hidden;"></td>
+    </tfoot>
+      
   </table>
-</div>

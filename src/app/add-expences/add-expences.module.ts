@@ -5,13 +5,15 @@ import { AddExpencesComponent } from './add-expences/add-expences.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddFormComponent } from './add-form/add-form.component';
+import { ExpencesOverviewModule } from '../expences/expences-overview.module';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ExpencesOverviewModule
   ],
   declarations: [
     SetDateComponent,
