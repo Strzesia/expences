@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expence } from '../../models/expence';
-import { Sort } from '../../shared/sort';
+import { Sort, ArraySorter } from '../../shared/sort';
 
 @Component({
   selector: 'app-expences-table',
@@ -9,9 +9,9 @@ import { Sort } from '../../shared/sort';
 })
 export class ExpencesTableComponent implements OnInit {
 
-  private expences: Expence[];
-  expence : Expence;
-  sort : Sort = Sort.unsorted;
+  expences: Expence[];
+  expence: Expence;
+  arraySorter: ArraySorter = new ArraySorter();
   @Input() expencesSum?: number = 0;
   @Output() deletedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
 
@@ -28,32 +28,20 @@ export class ExpencesTableComponent implements OnInit {
     });
   }  
 
-
   onDeleteClick(expence: Expence) {
     this.deletedExpence.emit(expence);
   }
 
-  sortByDate(expences: Expence[]):Expence[] {
-    if (this.sort == Sort.byDate){
-      return expences.reverse();
-    }
-    this.sort = Sort.byDate;
-    return expences.sort((a,b) => a.date - b.date );    
+  sortByDate(): void {
+    this.arraySorter.sortExpenceByDate(this.expences);
   }
 
-  sortByCategory(expences: Expence[]):Expence[] {
-    if (this.sort == Sort.byCategory){
-      return expences.reverse();
-    }
-    this.sort = Sort.byCategory;
-    return expences.sort((a,b) => a.category.name.localeCompare(b.category.name));    
+  sortByCategory(): void {
+    this.arraySorter.sortExpenceByCategory(this.expences);
   }
 
-  sortByCost(expences: Expence[]):Expence[] {
-    if (this.sort == Sort.byCost){
-      return expences.reverse();
-    }
-    this.sort = Sort.byCost;
-    return expences.sort((a,b) => a.cost - b.cost );    
+  sortByCost(): void {
+    this.arraySorter.sortExpenceByCost(this.expences);
   }
+
 }

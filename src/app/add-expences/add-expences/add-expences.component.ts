@@ -4,7 +4,7 @@ import { CategoriesService } from '../../services/categories.service';
 import { ExpencesService } from '../../services/expences.service';
 import { Expence } from '../../models/expence';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Sort } from '../../shared/sort';
+import { ArraySorter } from '../../shared/sort';
 
 @Component({
   selector: 'app-add-expences',
@@ -16,10 +16,10 @@ export class AddExpencesComponent implements OnInit {
   categories: Category[];
   expenceForm: FormGroup;
   currentDate: number;
-  sort: Sort = Sort.unsorted;
   expence: Expence;
   expences: Expence[] = [];
   expencesSum: number = 0;
+  arraySorter: ArraySorter = new ArraySorter();
 
   constructor(
     private categoriesService: CategoriesService,
@@ -28,19 +28,19 @@ export class AddExpencesComponent implements OnInit {
 
   ngOnInit() {
     this.loadCategories();
-    }
+  }
 
   loadCategories(): void {
-    this.categoriesService.getCategories().subscribe(data => {
-      this.categories = data;
-      this.sortByName(this.categories);
-    })
+    this.categoriesService.getCategories().subscribe(
+      categories => {
+        this.arraySorter.sortCategoriesByName(categories);
+        this.categories = categories
+    });
   }
   
   onCreateExpence(data : Expence): void {
       this.expences.push(data)
       this.expencesSum += data.cost;
-      console.log(`Suma wydatkow = ${this.expencesSum}`)
   }
 
   onDeleteClick(expence: Expence): void {
@@ -59,14 +59,6 @@ export class AddExpencesComponent implements OnInit {
 
   getDate(date: number): void {
     this.currentDate = date;
-  }
-
-  sortByName(categories: Category[]): Category[] {
-    if (this.sort == Sort.byName){
-      return categories.reverse();
-    }
-    this.sort = Sort.byName;
-    return categories.sort((a,b) => a.name.localeCompare(b.name) );
   }
 
 }
