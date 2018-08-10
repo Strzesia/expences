@@ -34,6 +34,12 @@ export class ExpencesOverviewComponent implements OnInit {
     )
   }
 
+  editExpence(expence: Expence): void {
+    this.expencesService.editExpence(expence.id, expence).subscribe(
+      () => this.onCategoriesChange(this.currentCategoryId)
+    )
+  }
+
   loadCategories(): void {
     this.categoriesServeice.getCategories().subscribe((categories) => {
       this.arraySorter.sortCategoriesByName(categories);
@@ -43,14 +49,14 @@ export class ExpencesOverviewComponent implements OnInit {
 
   loadExpences(): void {
     this.expencesService.getExpences().subscribe((expences) => {
-      this.expences = expences;
+      this.expences = this.sortByDate(expences);
     })
   }
 
   loadExpencesByCategory(categoryId: number): void {
     this.expencesService.getExpencesByCategory(categoryId).subscribe(
       expences => {
-        this.expences = expences;
+        this.expences = this.sortByDate(expences);
       })
   }
 
@@ -67,4 +73,7 @@ export class ExpencesOverviewComponent implements OnInit {
     }
   }
 
+  sortByDate(expences: Expence[]): Expence[] {
+    return this.arraySorter.sortExpenceByDate(expences);
+  }
 }

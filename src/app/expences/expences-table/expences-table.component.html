@@ -11,21 +11,8 @@
 
     <tbody>
       <tr *ngFor="let expence of expences; let i = index">
-        <td>
-          {{ expence.date | date:"dd.MM.yyyy"}}
-        </td>
-
-        <td>{{ expence.category.name }}</td>
-
-        <td>
-          {{ expence.cost | currency:"PLN"}}
-        </td>
-
-        <td>
-          <button
-            (click)="onDeleteClick(expence)"
-            class="btn btn-danger fa fa-times"
-          ></button>
+        <td colspan="4">
+          <app-expences-table-row [categories]="categories" [expence]="expence" (deletedExpence)="deleteExpence($event)" (editedExpense)="onEditExpence($event)"></app-expences-table-row>
         </td>
       </tr>
     </tbody>

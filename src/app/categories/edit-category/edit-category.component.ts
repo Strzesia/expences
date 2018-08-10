@@ -18,10 +18,7 @@ export class EditCategoryComponent implements OnInit {
   @Output() editedCategory: EventEmitter<Category> = new EventEmitter<Category>();
 
   constructor(
-    private categoriesService: CategoriesService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
   ) { }
 
   ngOnInit() {

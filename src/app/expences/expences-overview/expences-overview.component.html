@@ -15,5 +15,5 @@
       <option *ngFor="let category of categories; let i = index" value="{{category.id}}">{{ category.name }}</option>
     </select>
   </div>
-  <app-expences-table *ngIf="expences" [expencesArr]="expences" (deletedExpence)="deleteExpence($event)"></app-expences-table>
+  <app-expences-table *ngIf="expences && categories" [categories]="categories" [expencesArr]="expences" (deletedExpence)="deleteExpence($event)" (editedExpense)="editExpence($event)"></app-expences-table>
 </div>
