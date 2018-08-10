@@ -1,0 +1,20 @@
+<div>
+  <div class="row form-group" [formGroup]="expenceEditForm">
+    <div class="col-sm-3">
+        <input formControlName="date" type="date" [ngModel]="expence.date | date:'yyyy-MM-dd'">
+    </div>
+    <div class="col-sm-3">
+      <select formControlName="categoryId" value="{{expence.category.id}}">
+        <option value="{{expence.category.id}}" hidden>{{ expence.category.name }}</option>
+        <option *ngFor="let category of categories; let i = index" value="{{category.id}}">{{ category.name }}</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <input formControlName="cost" type="number" placeholder="{{expence.cost}}"> PLN
+    </div>
+    <div class="col-sm-2 btn-group action">
+      <button (click)="onEditClick(expenceEditForm.value)" class="btn btn-success fa fa-check" type="submit"></button>
+      <button (click)="closeEditForm()" class="btn btn-danger fa fa-times"></button>
+    </div>
+  </div>
+</div>
