@@ -23,15 +23,10 @@ export class ExpencesTableRowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
   }
 
   onCloseEditForm(closed: boolean) {
     this.editFormClosed = closed;
-    this.expencesService.getExpence(this.expence.id).subscribe(
-      editedExpence => {
-        this.expence = editedExpence;
-      });
   }
 
   onDeleteClick(expence: Expence) {

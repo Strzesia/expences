@@ -26,7 +26,6 @@ export class ExpencesTableRowEditComponent implements OnInit {
 
   ngOnInit() {
     this.expenceEditForm = this.buildExpenceEditForm();
-    console.log(`Categories: ${this.categories}`)
   }
 
   buildExpenceEditForm():FormGroup {
@@ -44,6 +43,7 @@ export class ExpencesTableRowEditComponent implements OnInit {
   onEditClick(formValue: any): void{
     let expence = this.createExpence(formValue);
     this.emitExpense(expence);
+    this.closeEditForm();
   }
 
   emitExpense(expence: Expence): void {

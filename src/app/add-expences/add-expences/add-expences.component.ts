@@ -3,7 +3,6 @@ import { Category } from '../../models/category';
 import { CategoriesService } from '../../services/categories.service';
 import { ExpencesService } from '../../services/expences.service';
 import { Expence } from '../../models/expence';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ArraySorter } from '../../shared/sort';
 
 @Component({
@@ -14,9 +13,7 @@ import { ArraySorter } from '../../shared/sort';
 export class AddExpencesComponent implements OnInit {
 
   categories: Category[];
-  expenceForm: FormGroup;
   currentDate: number;
-  expence: Expence;
   expences: Expence[] = [];
   expencesSum: number = 0;
   arraySorter: ArraySorter = new ArraySorter();
@@ -39,37 +36,49 @@ export class AddExpencesComponent implements OnInit {
   }
   
   onCreateExpence(data : Expence): void {
-    data.category = this.setCategory(data.category);
+    data.category = this.getCategoryName(data.category);
+    data.id = this.expences.length;
     this.expences.push(data);
-    this.expencesSum += data.cost;
+    this.updateSum();
   }
 
   onDeletedExpence(expence: Expence): void {
     this.expences = this.expences.filter(item => item !== expence);
+    this.updateSum();
   }
 
-  onEditedExpense(expence: Expence): void {
-    this.expences = this.expences.filter(item => item !== expence);
+  onEditedExpense(expense: Expence): void {
+    this.expences[expense.id] = expense;
+    expense.category = this.getCategoryName(expense.category);
+    this.updateSum();
   }
 
   saveExpences(): void {
-    this.expences.forEach(expence => 
-      {
-      this.expencesService.addExpence(expence).subscribe(
-        (expence) => {
-        console.log(`${expence.category}, ${expence.cost} is added`);
-        this.expences = [];
-      })});
+    this.expences.forEach(
+      expence => {
+        this.expencesService.addExpence(expence).subscribe(
+          (expence) => {
+          this.expences = [];
+        })
+      });
   }
 
   setDate(date: number): void {
     this.currentDate = date;
   }
 
-  setCategory(category: Category): Category {
+  getCategoryName(category: Category): Category {
     this.categoriesService.getCategory(category.id).subscribe(
       cat => category.name = cat.name
     );
     return category;
+  }
+
+  updateSum(): void {
+    this.expencesSum = 0;
+    this.expences.forEach(
+      expence =>{
+        this.expencesSum += expence.cost
+      }); 
   }
 }

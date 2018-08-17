@@ -82,6 +82,12 @@ export class ExpencesOverviewComponent implements OnInit {
     );
   }
 
+  onEditExpense(expense: Expence): void {
+    this.expencesService.editExpence(expense.id, expense).subscribe(
+    () => this.loadExpences()
+    )
+  }
+
   loadExpences():void {
     if (this.currentCategoryId == -1) {
       this.loadExpencesWhenNoCategory();
