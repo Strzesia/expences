@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Expence } from '../../models/expence';
 import { Category } from '../../models/category';
+import { ExpencesService } from '../../services/expences.service';
 
 @Component({
   selector: 'app-expences-table-row',
@@ -15,7 +16,9 @@ export class ExpencesTableRowComponent implements OnInit {
   @Output() editedExpense: EventEmitter<Expence> = new EventEmitter<Expence>();
   @Output() deletedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
   
-  constructor() { }
+  constructor(
+    private expencesService: ExpencesService
+  ) { }
 
   ngOnInit() {
   }
@@ -25,7 +28,14 @@ export class ExpencesTableRowComponent implements OnInit {
   }
 
   onDeleteClick(expence: Expence) {
-    this.deletedExpence.emit(expence);
+    this.deleteExpence(expence);
+  }
+
+  deleteExpence(expence: Expence):void {
+    this.expencesService.deleteExpence(expence.id).subscribe(
+      deletedExpence => {
+        this.deletedExpence.emit(deletedExpence);
+      });
   }
 
 }

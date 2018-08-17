@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
-import { ExpencesEditFormComponent } from '../expences/expences-edit-form/expences-edit-form.component';
 
 @NgModule({
   imports: [
@@ -9,10 +8,8 @@ import { ExpencesEditFormComponent } from '../expences/expences-edit-form/expenc
     ],
   exports: [
     HeaderComponent,
-    ExpencesEditFormComponent
   ],
   declarations: [
-    ExpencesEditFormComponent,
     HeaderComponent
   ]
 })

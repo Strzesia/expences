@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Expence } from '../../models/expence';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Category } from '../../models/category';
+import { ExpencesService } from '../../services/expences.service';
 
 @Component({
   selector: 'app-expences-table-row-edit',
@@ -12,6 +13,7 @@ export class ExpencesTableRowEditComponent implements OnInit {
 
   @Input() expence: Expence;
   @Input() categories: Category[];
+  
   expenceEditForm: FormGroup;
 
   @Output() closedEditForm: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -19,7 +21,8 @@ export class ExpencesTableRowEditComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private expencesService: ExpencesService
   ) { }
 
   ngOnInit() {
@@ -44,6 +47,13 @@ export class ExpencesTableRowEditComponent implements OnInit {
 
   emitExpence(expence: Expence): void {
     this.editedExpense.emit(expence);
+  }
+
+  editExpence(expence: Expence): void {
+    this.expencesService.editExpence(expence.id, expence).subscribe(
+      editedExpence =>{
+        this.emitExpence(editedExpence);
+      })
   }
 
   createExpence(data : any): Expence {
