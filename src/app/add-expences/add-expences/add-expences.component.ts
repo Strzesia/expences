@@ -36,6 +36,7 @@ export class AddExpencesComponent implements OnInit {
   }
   
   onCreateExpence(data : Expence): void {
+    data.date = new Date(data.date);
     data.category = this.getCategoryName(data.category);
     data.id = this.expences.length;
     this.expences.push(data);
@@ -57,9 +58,7 @@ export class AddExpencesComponent implements OnInit {
     this.expences.forEach(
       expence => {
         this.expencesService.addExpence(expence).subscribe(
-          (expence) => {
-          this.expences = [];
-        })
+          () => this.expences = []);
       });
   }
 
