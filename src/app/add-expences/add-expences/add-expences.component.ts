@@ -44,8 +44,12 @@ export class AddExpencesComponent implements OnInit {
     this.expencesSum += data.cost;
   }
 
-  onDeleteClick(expence: Expence): void {
-    this.expences = this.expences.filter(item => item !== expence)
+  onDeletedExpence(expence: Expence): void {
+    this.expences = this.expences.filter(item => item !== expence);
+  }
+
+  onEditedExpense(expence: Expence): void {
+    this.expences = this.expences.filter(item => item !== expence);
   }
 
   saveExpences(): void {
@@ -63,8 +67,9 @@ export class AddExpencesComponent implements OnInit {
   }
 
   setCategory(category: Category): Category {
-    this.categoriesService.getCategory(category.id).subscribe(cat => category.name = cat.name);
-    console.log(category.name)
+    this.categoriesService.getCategory(category.id).subscribe(
+      cat => category.name = cat.name
+    );
     return category;
   }
 }

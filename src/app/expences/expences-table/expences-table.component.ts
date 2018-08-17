@@ -10,13 +10,16 @@ import { Category } from '../../models/category';
 })
 export class ExpencesTableComponent implements OnInit {
 
+  @Input() expencesSum?: number = 0;
+  @Input() categories: Category[];
+  
   expences: Expence[];
   expence: Expence;
   arraySorter: ArraySorter = new ArraySorter();
-  @Input() expencesSum?: number = 0;
-  @Input() categories: Category[];
+
+  @Output() closedEditForm: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() editedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
   @Output() deletedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
-  @Output() editedExpense: EventEmitter<Expence> = new EventEmitter<Expence>();
 
   constructor() { }
 
@@ -31,11 +34,14 @@ export class ExpencesTableComponent implements OnInit {
     });
   }  
 
-
-  onEditExpence(expence: Expence): void {
-    this.editedExpense.emit(expence);
+  onDeletedExpense(expence: Expence) {
+    this.deletedExpence.emit(expence);
   }
 
+  onEditdExpense(expence: Expence): void{
+    this.editedExpence.emit(expence);
+  }
+  
   sortByDate(): void {
     this.arraySorter.sortExpenceByDate(this.expences);
   }

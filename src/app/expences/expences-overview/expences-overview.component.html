@@ -26,6 +26,6 @@
     <ng-template #allDays></ng-template>
 
   </div>
-  <app-expences-table *ngIf="expences && categories" 
-    [categories]="categories" [expencesArr]="expences"></app-expences-table>
+  <app-expences-table *ngIf="expences && categories" [categories]="categories" [expencesArr]="expences" 
+  (deletedExpence)="onDeleteExpense($event)" (editedExpence)="onEditExpense($event)"> </app-expences-table>
 </div>

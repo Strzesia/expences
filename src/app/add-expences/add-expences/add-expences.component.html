@@ -17,6 +17,7 @@
 
 </div>
 
-<app-expences-table *ngIf="expences.length > 0" [expencesArr]="expences" [expencesSum]="expencesSum" (deletedExpence)="onDeleteClick($event)" ></app-expences-table>
+<app-expences-table *ngIf="expences.length > 0" [expencesArr]="expences" [expencesSum]="expencesSum"
+  (deletedExpence)="onDeletedExpence($event)" (editedExpence)="onEditedExpense($event)" ></app-expences-table>
 
 <app-set-date (gotDate)="setDate($event)"></app-set-date>
