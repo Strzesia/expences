@@ -39,8 +39,9 @@ export class AddExpencesComponent implements OnInit {
   }
   
   onCreateExpence(data : Expence): void {
-      this.expences.push(data)
-      this.expencesSum += data.cost;
+    data.category = this.setCategory(data.category);
+    this.expences.push(data);
+    this.expencesSum += data.cost;
   }
 
   onDeleteClick(expence: Expence): void {
@@ -57,8 +58,13 @@ export class AddExpencesComponent implements OnInit {
       })});
   }
 
-  getDate(date: number): void {
+  setDate(date: number): void {
     this.currentDate = date;
   }
 
+  setCategory(category: Category): Category {
+    this.categoriesService.getCategory(category.id).subscribe(cat => category.name = cat.name);
+    console.log(category.name)
+    return category;
+  }
 }

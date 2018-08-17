@@ -1,0 +1,19 @@
+<div *ngIf="editFormClosed; else settings" class="row">
+  <div class="col-sm-3">
+    {{ expence.date | date:"dd.MM.yyyy"}}
+  </div>
+  <div class="col-sm-3">
+    {{ expence.category.name }}
+  </div>
+  <div class="col-sm-3">
+    {{ expence.cost | currency:"PLN"}}
+  </div>
+  <div class=" col-sm-3 btn btn-group action float-right">
+    <button (click)='editFormClosed = !editFormClosed' class="btn btn-primary">edit</button>
+    <button (click)="onDeleteClick(expence)" class="btn btn-danger fa fa-times"></button>
+  </div>
+</div>
+
+<ng-template #settings>
+  <app-expences-table-row-edit [categories]="categories" [expence]="expence" (closedEditForm)="editFormClosed = $event" (editedExpense)="onEditExpence($event)"></app-expences-table-row-edit>
+</ng-template>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExpencesEditFormComponent } from './expences-edit-form.component';
+import { ExpencesTableRowComponent } from './expences-table-row.component';
 
-describe('ExpencesEditFormComponent', () => {
-  let component: ExpencesEditFormComponent;
-  let fixture: ComponentFixture<ExpencesEditFormComponent>;
+describe('ExpencesTableRowComponent', () => {
+  let component: ExpencesTableRowComponent;
+  let fixture: ComponentFixture<ExpencesTableRowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExpencesEditFormComponent ]
+      declarations: [ ExpencesTableRowComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExpencesEditFormComponent);
+    fixture = TestBed.createComponent(ExpencesTableRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

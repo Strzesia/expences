@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expence } from '../../models/expence';
 import { Sort, ArraySorter } from '../../shared/sort';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-expences-table',
@@ -13,7 +14,9 @@ export class ExpencesTableComponent implements OnInit {
   expence: Expence;
   arraySorter: ArraySorter = new ArraySorter();
   @Input() expencesSum?: number = 0;
+  @Input() categories: Category[];
   @Output() deletedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
+  @Output() editedExpense: EventEmitter<Expence> = new EventEmitter<Expence>();
 
   constructor() { }
 
@@ -28,8 +31,9 @@ export class ExpencesTableComponent implements OnInit {
     });
   }  
 
-  onDeleteClick(expence: Expence) {
-    this.deletedExpence.emit(expence);
+
+  onEditExpence(expence: Expence): void {
+    this.editedExpense.emit(expence);
   }
 
   sortByDate(): void {

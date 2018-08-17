@@ -41,15 +41,27 @@ export class ExpencesService {
     ) as Observable<Expence>;
   }
 
-  getExpencesByDay(data): Observable<Expence[]> {
-    return this.http.post(
-      this.apiUrl, data
+  getExpencesByDay(day: String): Observable<Expence[]> {
+    return this.http.get(
+      this.apiUrl + `/day/${day}`
     ) as Observable<Expence[]>;
   }
   
-  getExpencesByDays(data): Observable<Expence[]> {
-    return this.http.post(
-      this.apiUrl, data
+  getExpencesByDays(dateFrom: String, dateTo: String): Observable<Expence[]> {
+    return this.http.get(
+      this.apiUrl + `/days/${dateFrom}/${dateTo}`
+    ) as Observable<Expence[]>;
+  }  
+  
+  getExpencesByDayAndCategory(day: String, categoryId: number): Observable<Expence[]> {
+    return this.http.get(
+      this.apiUrl + `/category/${categoryId}/day/${day}`
+    ) as Observable<Expence[]>;
+  }
+  
+  getExpencesByDaysAndCategory(dateFrom: String, dateTo: String, categoryId: number): Observable<Expence[]> {
+    return this.http.get(
+      this.apiUrl + `/category/${categoryId}/days/${dateFrom}/${dateTo}`
     ) as Observable<Expence[]>;
   }
 

@@ -9,11 +9,6 @@
     </div>
   </div>
 
-  <ng-template *ngIf='loading'>
-    <i class="fas fa-spinner fa-pulse"></i>
-    <p><b>xxx</b></p>
-  </ng-template>
-
   <div class="btn btn-group">
       <button (click)="saveExpences()" class="btn btn-success">
         Add all
@@ -24,4 +19,4 @@
 
 <app-expences-table *ngIf="expences.length > 0" [expencesArr]="expences" [expencesSum]="expencesSum" (deletedExpence)="onDeleteClick($event)" ></app-expences-table>
 
-<app-set-date (gotDate)="getDate($event)"></app-set-date>
+<app-set-date (gotDate)="setDate($event)"></app-set-date>
