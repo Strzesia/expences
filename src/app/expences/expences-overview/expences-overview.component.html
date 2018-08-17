@@ -27,6 +27,5 @@
 
   </div>
   <app-expences-table *ngIf="expences && categories" 
-    [categories]="categories" [expencesArr]="expences" 
-    (deletedExpence)="deleteExpence($event)" (editedExpense)="editExpence($event)"></app-expences-table>
+    [categories]="categories" [expencesArr]="expences"></app-expences-table>
 </div>

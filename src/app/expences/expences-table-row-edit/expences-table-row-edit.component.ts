@@ -17,7 +17,6 @@ export class ExpencesTableRowEditComponent implements OnInit {
   expenceEditForm: FormGroup;
 
   @Output() closedEditForm: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() editedExpense: EventEmitter<Expence> = new EventEmitter<Expence>();
 
 
   constructor(
@@ -42,18 +41,15 @@ export class ExpencesTableRowEditComponent implements OnInit {
   }
 
   onEditClick(formValue: any): void{
-    this.emitExpence(this.createExpence(formValue));
+    this.expence = this.createExpence(formValue);
+    this.editExpence();
   }
 
-  emitExpence(expence: Expence): void {
-    this.editedExpense.emit(expence);
-  }
-
-  editExpence(expence: Expence): void {
-    this.expencesService.editExpence(expence.id, expence).subscribe(
-      editedExpence =>{
-        this.emitExpence(editedExpence);
-      })
+  editExpence(): void {
+    this.expencesService.editExpence(this.expence.id, this.expence).subscribe(
+      editedExpence => {
+        this.closeEditForm();
+      });
   }
 
   createExpence(data : any): Expence {
