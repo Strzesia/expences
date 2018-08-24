@@ -15,5 +15,5 @@
 </div>
 
 <ng-template #settings>
-  <app-expences-table-row-edit [categories]="categories" [expence]="expence" (closedEditForm)="editFormClosed = $event" (editedExpense)="onEditExpence($event)"></app-expences-table-row-edit>
+  <app-expences-table-row-edit [categories]="categories" [expence]="expence" (closedEditForm)="onCloseEditForm($event)" (editedExpence)="onEditedExpense($event)"></app-expences-table-row-edit>
 </ng-template>
