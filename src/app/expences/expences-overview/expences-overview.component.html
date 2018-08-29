@@ -1,20 +1,27 @@
-<app-header></app-header>
+<app-header>
+  <p component>expenses overview</p>
+</app-header>
+
 <div class="container">
-  <div class="row">
+
+  <div>
     <select *ngIf="categories" (change)="setCategoryId($event.target.value)">
       <option value="-1">All categories</option>
       <option *ngFor="let category of categories; let i = index" value="{{category.id}}">{{ category.name }}</option>
     </select>
 
-    <label><input type="radio" name="radio" (change)="setDaysRadio('all')" checked>  All  </label>
-    <label><input type="radio" name="radio" (change)="setDaysRadio('one')" >  One day  </label>
-    <label><input type="radio" name="radio" (change)="setDaysRadio('many')">  Many days  </label>
+    <div class="radios">
+      <label><input type="radio" name="radio" (change)="setDaysRadio('all')" checked>  All  </label>
+      <label><input type="radio" name="radio" (change)="setDaysRadio('one')" >  One day  </label>
+      <label><input type="radio" name="radio" (change)="setDaysRadio('many')">  Many days  </label>
+    </div>
 
-    <ng-container *ngIf="daysRadio === 'one';else manyDays">
+    <ng-container class="dates" *ngIf="daysRadio === 'one';else manyDays">
       <label> Day: <input #dayInput type="date" [ngModel]="currentDay | date:'yyyy-MM-dd'" (ngModelChange)="setDay(dayInput.value)" ></label>
     </ng-container>
-    <ng-template #manyDays>
-      <ng-container *ngIf="daysRadio === 'many';else allDays">
+
+    <ng-template class="dates" #manyDays>
+      <ng-container *ngIf="daysRadio === 'many'">
           <label> From date: 
             <input #dayFromInput type="date" [ngModel]="currentDateFrom | date:'yyyy-MM-dd'" (ngModelChange)="setDateFrom(dayFromInput.value)">
           </label>
@@ -23,10 +30,12 @@
           </label>
       </ng-container>
     </ng-template>
-    <ng-template #allDays></ng-template>
-
+    
   </div>
+
   <app-expences-table *ngIf="expences && categories" 
     [categories]="categories" [expencesArr]="expences" 
-    (deletedExpence)="deleteExpence($event)" (editedExpense)="editExpence($event)"></app-expences-table>
+    (deletedExpence)="deleteExpence($event)" (editedExpense)="editExpence($event)">
+  </app-expences-table>
+
 </div>
