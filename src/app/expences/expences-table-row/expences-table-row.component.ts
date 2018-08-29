@@ -12,10 +12,12 @@ export class ExpencesTableRowComponent implements OnInit {
   
   @Input() expence: Expence;
   @Input() categories: Category[];
+
   editFormClosed: boolean = true;
-  @Output() editedExpense: EventEmitter<Expence> = new EventEmitter<Expence>();
+
   @Output() deletedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
-  
+  @Output() editedExpence: EventEmitter<Expence> = new EventEmitter<Expence>();
+
   constructor(
     private expencesService: ExpencesService
   ) { }
@@ -23,19 +25,17 @@ export class ExpencesTableRowComponent implements OnInit {
   ngOnInit() {
   }
 
-  onEditExpence(expence: Expence): void {
-    this.editedExpense.emit(expence);
+  onCloseEditForm(closed: boolean) {
+    this.editFormClosed = closed;
   }
 
   onDeleteClick(expence: Expence) {
-    this.deleteExpence(expence);
+    this.deletedExpence.emit(expence);
+  }
+  
+  onEditedExpense(expence: Expence): void{
+    this.editedExpence.emit(expence);
   }
 
-  deleteExpence(expence: Expence):void {
-    this.expencesService.deleteExpence(expence.id).subscribe(
-      deletedExpence => {
-        this.deletedExpence.emit(deletedExpence);
-      });
-  }
 
 }
